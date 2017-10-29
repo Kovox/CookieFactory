@@ -20,11 +20,15 @@ public class Stock {
 
     public void addCookie(Cookie cookie, int amount) {
         checkType(cookie);
-        cookiesStock.put(cookie, cookiesStock.get(cookie) + amount);
+        if (cookiesStock.containsKey(cookie))
+            cookiesStock.put(cookie, cookiesStock.get(cookie) + amount);
+        else cookiesStock.put(cookie, amount);
     }
 
     private void checkType(Cookie cookie) {
-        for (Cookie c : cookieType) {
+        if (cookieType.isEmpty())
+            cookieType.add(cookie);
+        else for (Cookie c : cookieType) {
             if (c != cookie) {
                 cookieType.add(cookie);
                 break;

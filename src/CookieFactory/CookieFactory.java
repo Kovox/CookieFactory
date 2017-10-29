@@ -14,28 +14,42 @@ public class CookieFactory {
 
     private List<Recipe> recipes;
     private List<Manager> managers;
+    private List<Customer> customers;
+    private List<Order> orders;
     private Stock stock;
 
     public CookieFactory() {
         recipes = new ArrayList<>();
         managers = new ArrayList<>();
+        customers = new ArrayList<>();
+        orders = new ArrayList<>();
         stock = new Stock();
     }
 
-    public void order(Customer customer, Map<Cookie, Integer> order) {
-
+    public void order(Customer customer, Place shopPlace, Date rdv, Map<Cookie, Integer> order) {
+        Order newOrder = new Order(customer, shopPlace, rdv, order);
+        orders.add(newOrder);
     }
 
     public void subscription(Customer customer) {
         if (!customer.isSubscribed()) {
             customer.subscribe();
         } else
-            error("this customer has already subscribed to the Loyalty program");
+            info("this customer has already subscribed to the Loyalty program");
     }
 
     public void addRecipe(Recipe recipe) {
         if (!recipes.contains(recipe))
             recipes.add(recipe);
+        else
+            info("this cookie recipe is already in the cookie factory database.");
+    }
+
+    public void removeRecipe(Recipe recipe) {
+        if (recipes.contains(recipe))
+            recipes.remove(recipe);
+        else
+            error("you can't remove a recipe that doesn't exist.");
     }
 
     public void addCookieToStock(Cookie cookie, int amount) {
@@ -45,11 +59,29 @@ public class CookieFactory {
     public void addManager(Manager manager) {
         if (!managers.contains(manager))
             managers.add(manager);
+        else
+            info("this manager is already in the cookie factory database.");
     }
 
     public void removeManager(Manager manager) {
         if (managers.contains(manager))
             managers.remove(manager);
+        else
+            error("you can't fire a manager who doesn't exist.");
+    }
+
+    public void addCustomer(Customer customer) {
+        if (!customers.contains(customer))
+            customers.add(customer);
+        else
+            info("this customer is already in the cookie factory database.");
+    }
+
+    public void removeCustomer(Customer customer) {
+        if (customers.contains(customer))
+            customers.remove(customer);
+        else
+            error("you can't remove a customer who doesn't exist.");
     }
 
     /**
@@ -67,7 +99,11 @@ public class CookieFactory {
     }
 
     private void error(String message) {
-        System.out.println("Error :" + message);
+        System.out.println("Error : " + message);
+    }
+
+    private void info(String message) {
+        System.out.println("Info : " + message);
     }
 
 }
