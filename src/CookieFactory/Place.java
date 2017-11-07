@@ -10,7 +10,7 @@ public enum Place {
 
     private String address;
 
-    Place (String address) {
+    Place(String address) {
         this.address = address;
     }
 
