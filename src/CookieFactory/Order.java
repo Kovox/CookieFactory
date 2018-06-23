@@ -8,15 +8,21 @@ import java.util.Map;
 public class Order {
 
     private Customer customer;
+    private Stock cfStock;
     private Place shopPlace;
     private Date rdv;
     private Map<Cookie, Integer> cookieOrder;
 
-    public Order(Customer customer, Place shopPlace, Date rdv, Map<Cookie, Integer> cookieOrder) {
+    Order(Customer customer, Stock cfStock, Place shopPlace, Date rdv, Map<Cookie, Integer> cookieOrder) {
         this.customer = customer;
+        this.cfStock = cfStock;
         this.shopPlace = shopPlace;
         this.rdv = rdv;
         this.cookieOrder = cookieOrder;
+    }
+
+    public void takeOrder(Cookie cookie, int amount) {
+        cfStock.addCookieToStorehouse(cookie, amount);
     }
 
     public Customer getCustomer() {
@@ -57,7 +63,7 @@ public class Order {
         order.append("\nOrder details : ");
         for (Cookie cookie : cookieOrder.keySet()) {
             order.append(cookie.toString());
-            order.append("\nAmount ordered : " + cookieOrder.get(cookie));
+            order.append("\nAmount ordered : ").append(cookieOrder.get(cookie));
         }
         return order.toString();
     }

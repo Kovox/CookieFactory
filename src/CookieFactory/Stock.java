@@ -12,17 +12,22 @@ public class Stock {
 
     private List<Cookie> cookieType; // Useless ?
     private Map<Cookie, Integer> cookiesStock;
+    private Map<Cookie, Integer> storehouse;
 
-    public Stock() {
+    Stock() {
         cookieType = new ArrayList<>();
         cookiesStock = new HashMap<>();
     }
 
-    public void addCookie(Cookie cookie, int amount) {
+    void addCookie(Cookie cookie, int amount) {
         checkType(cookie);
         if (cookiesStock.containsKey(cookie))
             cookiesStock.put(cookie, cookiesStock.get(cookie) + amount);
         else cookiesStock.put(cookie, amount);
+    }
+
+    void addCookieToStorehouse(Cookie cookie, int amount) {
+
     }
 
     private void checkType(Cookie cookie) {
@@ -65,7 +70,7 @@ public class Stock {
         cookieType.remove(cookie);
     }
 
-    public List<Cookie> getCookieType() {
+    List<Cookie> getCookieType() {
         return cookieType;
     }
 

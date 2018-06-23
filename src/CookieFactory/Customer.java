@@ -16,7 +16,7 @@ public class Customer {
         orderedCookiesCounter = 0;
     }
 
-    public void subscribe() {
+    void subscribe() {
         subscribe = true;
     }
 
@@ -41,7 +41,7 @@ public class Customer {
         orderedCookiesCounter += amount;
     }
 
-    public boolean isSubscribed() {
+    boolean isSubscribed() {
         return subscribe;
     }
 

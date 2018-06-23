@@ -27,7 +27,7 @@ public class CookieFactory {
     }
 
     public void order(Customer customer, Place shopPlace, Date rdv, Map<Cookie, Integer> order) {
-        Order newOrder = new Order(customer, shopPlace, rdv, order);
+        Order newOrder = new Order(customer, stock, shopPlace, rdv, order);
         orders.add(newOrder);
     }
 
